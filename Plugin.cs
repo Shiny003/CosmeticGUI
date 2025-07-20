@@ -2,25 +2,26 @@ using BepInEx;
 using GorillaNetworking;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace CosmeticGUI
 {
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
-        private bool WeinerInMyLeftHand = false;
-        public Rect dick = new Rect(400, 10, 120, 90);
+        private bool guiEnabled = false;
+        public Rect rect = new Rect(400, 10, 120, 90);
 
         private void Update()
         {
-            if (Keyboard.current.tabKey.wasPressedThisFrame) WeinerInMyLeftHand = !WeinerInMyLeftHand;
+            if (Keyboard.current.tabKey.wasPressedThisFrame) guiEnabled = !guiEnabled;
         }
 
         private void OnGUI()
         { 
-            if (GUIEnabled)
+            if (guiEnabled)
             {
-                dick = GUI.Window(1, dick, CosmeticsWindow, $"Cosmetic GUI");
+                rect = GUI.Window(1, rect, CosmeticsWindow, $"Cosmetic GUI");
             }
         }
 
